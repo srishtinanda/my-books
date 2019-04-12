@@ -1,18 +1,10 @@
 import React from 'react';
-import {NavItem, Nav } from 'react-bootstrap';
-
+import './header.css';
 class Header extends React.Component {
   render() {
     return (
-      <div>
-        <Nav bsStyle="pills" activeKey={1}>
-          <NavItem eventKey={1} href= "/">
-            Book Shelve
-          </NavItem>
-          <NavItem eventKey={2} href= "/">
-            Search
-          </NavItem>
-        </Nav>
+      <div className ="header">
+          <h1>  Book Shelve </h1>
        </div>
     );
   }

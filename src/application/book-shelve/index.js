@@ -1,16 +1,16 @@
 import React from 'react';
-// import { Keys } from '../../components/button';
 import { Button } from 'react-bootstrap';
 import { Card, CardBody, CardFooter } from "react-simple-card";
 import {
   updateTheCategory
 } from '../redux-framework/actions';
-// import { bookArray } from '../assets/booksData';
+import './index.css';
 import { connect } from 'react-redux';
 import ImageHeader from 'react-simple-card/lib/components/ImageHeader';
+
 const imageSize = {
-  height: '40px',
-  width: '20px'
+  width: '200px',
+  padding: '25px'
 };
 
 class BookShelve extends React.Component {
@@ -21,20 +21,22 @@ class BookShelve extends React.Component {
     }
   }
   render() {
-    console.log(this.props.list, 'did it render again');
     return (
       <div>
-        <input value={this.state.input} type="text" onChange={this.onChangeHandler} />
+        <div className="search-header">
+          Search For Your Favorite Book:
+          <input value={this.state.input} clasName="input-box" type="text" onChange={this.onChangeHandler} />
+        </div>
         {this.props.list
           .filter((books) => this.state.input ? books.name.toLowerCase().includes(this.state.input.toLowerCase()) : books)
           .map((book, i) => (
             <Card key={i}>
-              <ImageHeader imageSrc={book.image_uri} style={imageSize} />
+              <ImageHeader className="book-image" imageSrc={book.image_uri} style={imageSize} />
               <CardBody>
                 <div>{book.id}</div>
                 <div>{book.name}</div>
                 <div>{book.author}</div>
-                <div>{book.category}</div>
+                <div className ="category">{book.category}</div>
               </CardBody>
               <CardFooter>
                 <Button onClick={(e) => this.addOrRemove(book, e)}> {book.category === null ? 'Add' : 'Remove'}
@@ -64,11 +66,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // inputValue: (item) => dispatch(userTypedInput(item)),
     updateCategory: (book) => dispatch(updateTheCategory(book)),
-    // calculation: (item) => dispatch(calculateResult(item)),
-    // clear: () => dispatch(clearInputString()),
-    // delete: () => dispatch(deleteLastChar())
   }
 }
 
